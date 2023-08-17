@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>
+		
+	</title>
+</head>
+<script type="module" src = "https://unpkg.com/@google/model-viewer@3.1.0/dist/model-viewer.min.js"></script>
+
+
+<style>
+  /* Sets height and width of viewable image on html page. */
+model-viewer  
+	{
+		width:  800 px;
+		height:  400px;
+	}
+</style>
+<body>
+  <img src= "" class="qr-code img-thumbnail img-responsive" />
+<model-viewer id="dimension-demo" ar ar-placement="wall" src="Bottle.glb" alt="A 3D model of an armchair.">
+  <div id="controls" class="dim">
+    <label for="ios-src">Product:</label>
+    <select id="src">
+      <option value="Bottle.glb">Bottle</option>
+      <option value="Laptop.glb">Laptop</option>
+      <option value="Monitor.gltf">Monitor</option>
+      <option value="SM_Dice.glb">SM_Dice</option>
+      <option value="Sofa Set.glb">Sofa Set</option> <!--multiple options for testing. -->
+      
+      
+      
+    </select><br>
+  
+  <!-- <div class="controls" > <!-- Creates a div wich will have a list of variants of frame colors. --> 
+    <!-- <div>Frame Variant: <select id="variant"></select></div>
+  </div> -->
+</model-viewer>
+<button type="button" class=
+			"btn btn-default" id="generate">
+			Get QR
+		</button>
+		</div>
+	</div>
+	</div>
+</div>
+<a href="">Paintings!</a>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="module">
+  var x2;
+  var y2;
+  //var check = "11.glb";
+  const modelViewerVariants = document.querySelector("model-viewer#dimension-demo");
+        const select = document.querySelector('#variant');
+        // modelViewerVariants.addEventListener('load', () => {
+
+        //   const names = modelViewerVariants.availableVariants; // call to get all the variants stored inside glb file.
+        //   $("#variant").empty();
+        //   for (const name of names) // creates a list (dropdown) with options, stored in glb. 
+        //   {
+        //     const option = document.createElement('option');
+        //     option.value = name;
+        //     option.textContent = name;
+            
+        //     select.appendChild(option);
+          
+        //   }
+          
+          
+
+        // });
+        
+      
+        // actually changes color of the frame.
+        // select.addEventListener('input', (event) => {
+          
+        //   modelViewerVariants.variantName = event.target.value === 'default' ? null : event.target.value;
+        
+        
+        //   //console.log(modelViewerVariants.variantName);
+        // });
+  
+
+const modelViewer = document.querySelector('#dimension-demo');
+
+// funtion to implement changes in src. this is purely for testing, as mentioned in html.
+modelViewer.querySelector('#src').addEventListener('input', (event) => {
+         modelViewer.src = event.target.value;  // change the src of the model viewer.
+ 
+
+       });
+
+  function htmlEncode(value) {
+	return $('<div/>').text(value)
+		.html();
+	}
+
+	$(function () {
+
+	// Specify an onclick function
+	// for the generate button
+	$('#generate').click(function () {
+
+		// Generate the link that would be
+		// used to generate the QR Code
+		// with the given data
+    let u = $(location).attr('href');
+		let finalURL =
+'https://chart.googleapis.com/chart?cht=qr&chl=' +
+		htmlEncode(u+"%23launch-ar") +
+		'&chs=160x160&chld=L|0'
+
+		// Replace the src of the image with
+		// the QR code image
+		$('.qr-code').attr('src', finalURL);
+	});
+	});
+</script>
+<style> 
+.button {
+       top:11%;
+       left:55%;
+       width:100px;
+       height:50px;
+       position: absolute;
+    
+}
+/*  model-viewer::part(default-ar-button)
+  {
+  background-color: red;
+ } */
+  #controls {
+    position: absolute;
+    bottom: 140px;
+    left: 16px;
+    max-width: unset;
+    transform: unset;
+    pointer-events: auto;
+    z-index: 100;
+  }
+
+  .dot{
+    display: none;
+  }
+
+  .dim{
+    background: #fff;
+    border-radius: 4px;
+    border: none;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    color: rgba(0, 0, 0, 0.8);
+    display: block;
+    font-family: Futura, Helvetica Neue, sans-serif;
+    font-size: 1em;
+    font-weight: 700;
+    max-width: 128px;
+    overflow-wrap: break-word;
+    padding: 0.5em 1em;
+    position: absolute;
+    width: max-content;
+    height: max-content;
+    transform: translate3d(-50%, -50%, 0);
+    pointer-events: none;
+    --min-hotspot-opacity: 0;
+  }
+
+  @media only screen and (max-width: 800px) {
+    .dim{
+      font-size: 3vw;
+    }
+  }
+
+  .dimensionLineContainer{
+    pointer-events: none;
+    display: block;
+  }
+
+  .dimensionLine{
+    stroke: #16a5e6;
+    stroke-width: 2;
+    stroke-dasharray: 2;
+  }
+
+  .hide{
+    display: none;
+  }
+  :not(:defined) > * {
+    display: none;
+  }
+  .qr-code {
+  
+  position: relative; /* or "relative" depending on your layout needs */
+  top: 600px; /* Adjust the vertical position */
+  left: 50%; /* Adjust the horizontal position */
+  transform: translate(-50%, -50%); /* Center the image */
+  border: 1px solid #ccc; /* Optional: Add a border for visual clarity */
+}
+</style>
+</body>
+</html>
